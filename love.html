@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tehee</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="shortcut icon" href="media/heart-1.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="div">
+      <p>And you just need to know, I Love You</p>
+      <br/>
+    </div>
+
+    <div class="div-1">
+      <img src="media/heart-1.png" alt="heart-1" class="heart-1" />
+    </div>
+
+    <div class="div-2">
+      <img src="media/heart-1.png" alt="heart-2" class="heart-2" />
+    </div>
+
+    <div class="div-3">
+      <img src="media/heart-1.png" alt="heart-3" class="heart-3" />
+    </div>
+
+    <div id="audio-container">
+      <audio id="song" autoplay loop>
+        <source src="media/audio.mp3" type="audio/mp3" />
+      </audio>
+
+      <div class="audio-icon-wrapper" style="display: none">
+        <i class="bi bi-disc"></i>
+      </div>
+    </div>
+
+    <script>
+      const audioIconWrapper = document.querySelector(".audio-icon-wrapper");
+      const audioIcon = document.querySelector(".audio-icon-wrapper i");
+      const song = document.querySelector("#song");
+      let isPlaying = false;
+
+      function playAudio() {
+        song.volume = 0.1;
+        audioIconWrapper.style.display = "flex";
+        song.play();
+        isPlaying = true;
+      }
+
+      audioIconWrapper.onclick = function () {
+        if (isPlaying) {
+          song.pause();
+          audioIcon.classList.remove("bi-disc");
+          audioIcon.classList.add("bi-pause-circle");
+        } else {
+          song.play();
+          audioIcon.classList.add("bi-disc");
+          audioIcon.classList.remove("bi-pause-circle");
+        }
+
+        isPlaying = !isPlaying;
+      };
+
+      playAudio();
+    </script>
+  </body>
+</html>
