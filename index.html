@@ -3,13 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Love</title>
+    <title>Love ❤️</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="media/heart-1.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
   </head>
   <body>
-    <div class="div">
-      <a href="love.html"> <img class="heart" src="media/heart.png" alt="heart" /> </a>
-    </div>
+    <!-- Particle Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-content">
+        <p class="hero-subtitle fade-in-delay">Klik hati untuk membuka sesuatu yang spesial...</p>
+        
+        <!-- Animated Sparkles -->
+        <div class="sparkles-container"></div>
+
+        <div class="heart-container">
+          <a href="love.html" class="heart-link" id="heart-link">
+            <div class="heart-wrapper">
+              <img class="heart pulse" src="media/heart.png" alt="heart" />
+              <div class="heart-glow"></div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Floating Hearts -->
+        <div class="floating-hearts"></div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+      // Preload audio on heart click (especially for mobile)
+      const heartLink = document.getElementById('heart-link');
+      if (heartLink) {
+        heartLink.addEventListener('click', function(e) {
+          // Preload audio element
+          const audio = new Audio('media/audio.mp3');
+          audio.volume = 0.1;
+          audio.play().catch(() => {
+            // Ignore if autoplay is blocked, it will play when love.html loads
+          });
+        });
+        
+        // Also support touch for mobile
+        heartLink.addEventListener('touchstart', function(e) {
+          const audio = new Audio('media/audio.mp3');
+          audio.volume = 0.1;
+          audio.play().catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

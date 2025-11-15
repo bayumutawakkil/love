@@ -3,51 +3,308 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tehee</title>
+    <title>I Love You 💖</title>
     <link href="https://fonts.cdnfonts.com/css/coneria-script-demo" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="shortcut icon" href="media/heart-1.png" type="image/x-icon" />
   </head>
-  <body>
-    <div class="div">
-      <p>And you just need to know, I Love You</p>
-      <br/>
-    </div>
+  <body class="love-page">
+    <!-- Particle Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
 
-    <div class="div-1">
-      <img src="media/heart-1.png" alt="heart-1" class="heart-1" />
-    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-brand">💕</div>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link"><i class="bi bi-house"></i> Home</a>
+        <a href="#gallery" class="nav-link"><i class="bi bi-images"></i> Gallery</a>
+        <a href="#timeline" class="nav-link"><i class="bi bi-clock-history"></i> Timeline</a>
+        <a href="#messages" class="nav-link"><i class="bi bi-chat-heart"></i> Messages</a>
+      </div>
+    </nav>
 
-    <div class="div-2">
-      <img src="media/heart-1.png" alt="heart-2" class="heart-2" />
-    </div>
+    <!-- Main Message Section -->
+    <section class="main-message-section">
+      <div class="message-container">
+        <div class="main-message glass-card-3d">
+          <h1 class="love-title reveal-text">And you just need to know,</h1>
+          <h2 class="love-subtitle reveal-text delay-1">I Love You</h2>
+          <div class="heart-beat-wrapper">
+            <i class="bi bi-heart-fill beating-heart"></i>
+          </div>
+        </div>
+      </div>
 
-    <div class="div-3">
-      <img src="media/heart-1.png" alt="heart-3" class="heart-3" />
-    </div>
+      <!-- Floating Decorative Hearts -->
+      <div class="div-1">
+        <img src="media/heart-1.png" alt="heart-1" class="heart-1" />
+      </div>
+      <div class="div-2">
+        <img src="media/heart-1.png" alt="heart-2" class="heart-2" />
+      </div>
+      <div class="div-3">
+        <img src="media/heart-1.png" alt="heart-3" class="heart-3" />
+      </div>
+    </section>
 
+    <!-- Interactive Gallery Section -->
+    <section id="gallery" class="gallery-section">
+      <div class="container">
+        <h2 class="section-title">Memory Gallery</h2>
+        <p class="section-subtitle">Momen berharga bersama kita</p>
+        
+        <!-- Loading Indicator -->
+        <div id="gallery-loading" class="gallery-loading">
+          <div class="loader-heart">❤️</div>
+          <p>Loading memories...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="gallery-error" class="gallery-error" style="display: none;">
+          <i class="bi bi-exclamation-circle"></i>
+          <p>Unable to load photos. Please try again later.</p>
+        </div>
+        
+        <!-- Gallery Slider with Swiper -->
+        <div class="swiper gallery-swiper" id="gallery-swiper" style="display: none;">
+          <div class="swiper-wrapper" id="gallery-slider">
+            <!-- Photos will be loaded here dynamically -->
+          </div>
+          <!-- Navigation arrows -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <!-- Pagination dots -->
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <!-- Lightbox Modal -->
+      <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+          <button class="lightbox-close" onclick="closeLightbox()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+          <button class="lightbox-prev" onclick="navigateLightbox(-1)">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="lightbox-next" onclick="navigateLightbox(1)">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+          <img id="lightbox-image" src="" alt="Memory">
+          <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section">
+      <div class="container">
+        <h2 class="section-title">Perjalanan kita</h2>
+        <div class="timeline">
+          <div class="timeline-item left" data-animate="fade-in">
+            <div class="timeline-content glass-card">
+              <div class="timeline-date">Awal</div>
+              <h3>Chat pertama</h3>
+              <p>Momen yang mengawali semuanya</p>
+            </div>
+          </div>
+          <div class="timeline-item right" data-animate="fade-in">
+            <div class="timeline-content glass-card">
+              <div class="timeline-date">Nembak</div>
+              <h3>14 Maret 2024</h3>
+              <p>Awal kita berhubungan</p>
+            </div>
+          </div>
+          <div class="timeline-item left" data-animate="fade-in">
+            <div class="timeline-content glass-card">
+              <div class="timeline-date">Sekarang</div>
+              <h3>Masih Kuat</h3>
+              <p>Dan masih banyak lagi yang akan datang...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Messages Section -->
+    <section id="messages" class="messages-section">
+      <div class="container">
+        <h2 class="section-title">Sweet Messages</h2>
+        <div class="messages-grid">
+          <div class="message-card glass-card interactive-card">
+            <i class="bi bi-chat-quote message-icon"></i>
+            <p class="message-text">"Kamu membuat hariku selalu cerah"</p>
+            <div class="message-reactions">
+              <button class="reaction-btn" data-reaction="heart">
+                <i class="bi bi-heart-fill"></i>
+                <span>0</span>
+              </button>
+            </div>
+          </div>
+          <div class="message-card glass-card interactive-card">
+            <i class="bi bi-chat-quote message-icon"></i>
+            <p class="message-text">"Makacii telah menjadi diri sendiri"</p>
+            <div class="message-reactions">
+              <button class="reaction-btn" data-reaction="heart">
+                <i class="bi bi-heart-fill"></i>
+                <span>0</span>
+              </button>
+            </div>
+          </div>
+          <div class="message-card glass-card interactive-card">
+            <i class="bi bi-chat-quote message-icon"></i>
+            <p class="message-text">"Bersyukur banget punya diri mu"</p>
+            <div class="message-reactions">
+              <button class="reaction-btn" data-reaction="heart">
+                <i class="bi bi-heart-fill"></i>
+                <span>0</span>
+              </button>
+            </div>
+          </div>
+          <div class="message-card glass-card interactive-card">
+            <i class="bi bi-chat-quote message-icon"></i>
+            <p class="message-text">"Ku ingin kamu selalu disampingku"</p>
+            <div class="message-reactions">
+              <button class="reaction-btn" data-reaction="heart">
+                <i class="bi bi-heart-fill"></i>
+                <span>0</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Your Own Message -->
+        <div class="add-message-section">
+          <h3>Tambahkan Pesan</h3>
+          <div class="message-input-container glass-card">
+            <textarea 
+              id="custom-message" 
+              placeholder="Tulis sesuatu yang manis..." 
+              maxlength="100"
+            ></textarea>
+            <button id="add-message-btn" class="btn-primary">
+              <i class="bi bi-plus-circle"></i> Tambah Pesan
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card glass-card">
+            <div class="stat-number" data-target="365">0</div>
+            <div class="stat-label">Hari Bersama</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-number" data-target="100000">0</div>
+            <div class="stat-label">Senyuman Dibagikan</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-number" data-target="∞">0</div>
+            <div class="stat-label">Selamanya Bersama</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio Player -->
     <div id="audio-container">
       <audio id="song" autoplay loop>
         <source src="media/audio.mp3" type="audio/mp3" />
       </audio>
 
-      <div class="audio-icon-wrapper" style="display: none">
+      <div class="audio-icon-wrapper">
         <i class="bi bi-disc"></i>
+        <span class="audio-label">Now Playing</span>
       </div>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="scroll-top-btn">
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+      <p>Scroll to Explore</p>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <!-- Google Drive API disabled for file:// protocol -->
+    <!-- <script src="gallery.js"></script> -->
     <script>
+      // Firebase Configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAU8mEQckyBuVHCD4qXE--oqMNwbmbgRAs",
+        authDomain: "love-project-478212.firebaseapp.com",
+        databaseURL: "https://love-project-478212-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "love-project-478212",
+        storageBucket: "love-project-478212.firebasestorage.app",
+        messagingSenderId: "53677285576",
+        appId: "1:53677285576:web:fdc685e842c78bdbde05fd"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+      const messagesRef = database.ref('messages');
+      const reactionsRef = database.ref('reactions');
+
+      // Audio Player
       const audioIconWrapper = document.querySelector(".audio-icon-wrapper");
       const audioIcon = document.querySelector(".audio-icon-wrapper i");
       const song = document.querySelector("#song");
+      const beatingHeart = document.querySelector(".beating-heart");
       let isPlaying = false;
+      let audioInitialized = false;
 
       function playAudio() {
-        song.volume = 0.1;
-        audioIconWrapper.style.display = "flex";
-        song.play();
-        isPlaying = true;
+        if (!audioInitialized) {
+          song.volume = 0.1;
+          audioIconWrapper.style.display = "flex";
+          audioInitialized = true;
+        }
+        song.play().then(() => {
+          isPlaying = true;
+          audioIcon.classList.add("bi-disc");
+          audioIcon.classList.remove("bi-pause-circle");
+        }).catch(err => {
+          console.log("Autoplay prevented:", err);
+        });
+      }
+
+      // Start audio when beating heart is clicked (supports both click and touch)
+      if (beatingHeart) {
+        const startAudio = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!audioInitialized) {
+            playAudio();
+          } else if (!isPlaying) {
+            song.play().then(() => {
+              isPlaying = true;
+              audioIcon.classList.add("bi-disc");
+              audioIcon.classList.remove("bi-pause-circle");
+            });
+          }
+        };
+        
+        beatingHeart.addEventListener('click', startAudio);
+        beatingHeart.addEventListener('touchend', startAudio);
       }
 
       audioIconWrapper.onclick = function () {
@@ -60,11 +317,204 @@
           audioIcon.classList.add("bi-disc");
           audioIcon.classList.remove("bi-pause-circle");
         }
-
         isPlaying = !isPlaying;
       };
 
+      // Try to autoplay (may be blocked by browser)
       playAudio();
+
+      // Load messages from Firebase
+      function loadMessagesFromFirebase() {
+        const messagesGrid = document.querySelector('.messages-grid');
+        
+        // Listen for new messages
+        messagesRef.on('child_added', (snapshot) => {
+          const messageData = snapshot.val();
+          const messageId = snapshot.key;
+          
+          // Check if message already exists in DOM
+          if (!document.querySelector(`[data-message-id="${messageId}"]`)) {
+            addMessageCard(messageData.text, messagesGrid, messageId);
+          }
+        });
+      }
+
+      // Load reactions from Firebase
+      function loadReactionsFromFirebase() {
+        reactionsRef.on('value', (snapshot) => {
+          const reactions = snapshot.val() || {};
+          document.querySelectorAll('.reaction-btn').forEach((btn, index) => {
+            if (reactions[index]) {
+              btn.querySelector('span').textContent = reactions[index];
+            }
+          });
+        });
+      }
+
+      // Save reaction to Firebase
+      function saveReactionToFirebase(index, count) {
+        reactionsRef.child(index.toString()).set(count);
+      }
+
+      // Add message card helper function
+      function addMessageCard(messageText, messagesGrid, messageId = null) {
+        const newCard = document.createElement('div');
+        newCard.className = 'message-card glass-card interactive-card';
+        if (messageId) {
+          newCard.setAttribute('data-message-id', messageId);
+        }
+        newCard.innerHTML = `
+          <i class="bi bi-chat-quote message-icon"></i>
+          <p class="message-text">"${messageText}"</p>
+          <div class="message-reactions">
+            <button class="reaction-btn" data-reaction="heart">
+              <i class="bi bi-heart-fill"></i>
+              <span>0</span>
+            </button>
+          </div>
+        `;
+        
+        messagesGrid.appendChild(newCard);
+        
+        // Trigger animation after element is in DOM
+        requestAnimationFrame(() => {
+          newCard.classList.add('new-message');
+          setTimeout(() => {
+            newCard.classList.remove('new-message');
+          }, 500);
+        });
+        
+        // Add click event to reaction button
+        const reactionBtn = newCard.querySelector('.reaction-btn');
+        reactionBtn.addEventListener('click', function() {
+          const span = this.querySelector('span');
+          const count = parseInt(span.textContent) + 1;
+          span.textContent = count;
+          this.style.transform = 'scale(1.2)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 200);
+          
+          // Get the index of this button among all reaction buttons
+          const allButtons = document.querySelectorAll('.reaction-btn');
+          const index = Array.from(allButtons).indexOf(this);
+          saveReactionToFirebase(index, count);
+        });
+      }
+
+      // Message Reactions for default messages
+      document.querySelectorAll('.reaction-btn').forEach((btn, index) => {
+        btn.addEventListener('click', function() {
+          const span = this.querySelector('span');
+          const count = parseInt(span.textContent) + 1;
+          span.textContent = count;
+          
+          // Add animation
+          this.style.transform = 'scale(1.2)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 200);
+          
+          // Save to Firebase
+          saveReactionToFirebase(index, count);
+        });
+      });
+
+      // Add Custom Message
+      document.getElementById('add-message-btn').addEventListener('click', function() {
+        const messageInput = document.getElementById('custom-message');
+        const messageText = messageInput.value.trim();
+        
+        if (messageText) {
+          // Save to Firebase (will trigger child_added event which adds to DOM)
+          messagesRef.push({
+            text: messageText,
+            timestamp: Date.now()
+          });
+          
+          messageInput.value = '';
+          
+          // Scroll to messages section
+          setTimeout(() => {
+            const messagesGrid = document.querySelector('.messages-grid');
+            messagesGrid.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+      });
+
+      // Load data from Firebase on page load
+      loadMessagesFromFirebase();
+      loadReactionsFromFirebase();
+
+      // Scroll to Top
+      const scrollTopBtn = document.getElementById('scroll-top');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add('show');
+        } else {
+          scrollTopBtn.classList.remove('show');
+        }
+      });
+
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Calculate days together
+      function calculateDaysTogether() {
+        const startDate = new Date('2024-03-14');
+        const today = new Date();
+        const diffTime = Math.abs(today - startDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+      }
+
+      // Counter Animation
+      function animateCounter(element) {
+        const target = element.getAttribute('data-target');
+        const isInfinity = target === '∞';
+        
+        if (isInfinity) {
+          element.textContent = '∞';
+          return;
+        }
+        
+        // Use calculated days for first stat
+        const targetNum = element.parentElement.querySelector('.stat-label').textContent === 'Hari Bersama' 
+          ? calculateDaysTogether() 
+          : parseInt(target);
+        
+        const duration = 2000;
+        const increment = targetNum / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= targetNum) {
+            element.textContent = targetNum;
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(current);
+          }
+        }, 16);
+      }
+
+      // Intersection Observer for stats
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const statNumbers = entry.target.querySelectorAll('.stat-number');
+            statNumbers.forEach(num => animateCounter(num));
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      const statsSection = document.querySelector('.stats-section');
+      if (statsSection) {
+        statsObserver.observe(statsSection);
+      }
     </script>
   </body>
 </html>
